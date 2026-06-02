@@ -4,7 +4,7 @@ import { MyContext } from "./MyContext"
 import { List } from "./List"
 
 export const Display = () => {
-    const {state} = useContext(MyContext)       
+    const {state,Search_data} = useContext(MyContext)       
     return <>
         {/* Table Section */}
         <div className="col-md-8">
@@ -13,6 +13,7 @@ export const Display = () => {
                     <h3>Product List</h3>
                     <input
                         type="text"
+                        onChange={(e)=>Search_data(e.target.value)}
                         className="form-control w-50"
                         placeholder="Search user..."
                     />

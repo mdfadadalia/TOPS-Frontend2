@@ -1,10 +1,10 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Navigate, NavigationType, useNavigate } from "react-router-dom";
 import { MyContext } from "./MyContext";
 
 export const Create = () => {
 
-    const {DispatchSate} = useContext(MyContext)
+    const { Add_data, editState } = useContext(MyContext)
 
     const name = useRef()
     const price = useRef()
@@ -12,16 +12,33 @@ export const Create = () => {
 
     const navigate = useNavigate();
     const submitHandler = (e) => {
-        e.preventDefault();      
-        const data = {
-            name : name.current.value,
-            price : price.current.value,
-            qty : qty.current.value
+        e.preventDefault();
+        var data = []
+        if (editState != undefined) {
+             data = {
+                id : editState.id,
+                name: name.current.value,
+                price: price.current.value,
+                qty: qty.current.value
+            }
         }
-        DispatchSate({type:"ADD",payload:data})
-        navigate("/")  
-        // window.location.href = "/";
+        else {
+             data = {
+                name: name.current.value,
+                price: price.current.value,
+                qty: qty.current.value
+            }
+        }
+        Add_data(data, "UPDATE")
+        navigate("/")
     }
+    useEffect(() => {
+        if (editState != undefined) {
+            name.current.value = editState.name
+            price.current.value = editState.price
+            qty.current.value = editState.qty
+        }
+    }, [editState])
     return <>
         {/* Form Section */}
         <div className="col-md-4">
