@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { MyContext } from './MyContext'
 
 const Display = () => {
-    const { stud,delData,editData,serarchData } = useContext(MyContext)
+    const { stud,delData,editData,searchData } = useContext(MyContext)
     
     return (
         <div className="col-md-8">
@@ -11,7 +11,7 @@ const Display = () => {
                     <h3>User List</h3>
                     <input
                         type="text"
-                        onKeyUp={e=>serarchData(e.target.value)}
+                        onKeyUp={e=>searchData(e.target.value)}
                         className="form-control w-50"
                         placeholder="Search user..."
                     />

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { db } from "./Firebase";
-import { collection, getDocs, addDoc, deleteDoc, doc, getDoc, updateDoc, or, where, query } from "firebase/firestore";
+import { collection, getDocs, addDoc, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 export const MyContext = createContext()
 
@@ -43,7 +43,7 @@ export const MyContextProvider = ({ children }) => {
         setEdit()
         getData()
     }
-    const serarchData = async (value) => {
+    const searchData = async (value) => {
         if (value == "") {
             setStud(allstud)
         }
@@ -57,8 +57,8 @@ export const MyContextProvider = ({ children }) => {
         }
     }
     return <>
-        <MyContext value={{ stud, delData, addData, editData, edit, updateData, serarchData }}>
+        <MyContext.Provider value={{ stud, delData, addData, editData, edit, updateData, searchData }}>
             {children}
-        </MyContext>
+        </MyContext.Provider>
     </>
 }
