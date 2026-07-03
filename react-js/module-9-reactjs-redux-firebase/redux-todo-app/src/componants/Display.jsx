@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { editdata, remove } from '../slicer/todoSlicer'
+import { remove } from '../slicer/todoSlicer'
 
-const Display = () => {
+const Display = ({editdata}) => {    
     const todo = useSelector(state => state.todo)
     const dispatch = useDispatch()
     return <>
@@ -27,10 +27,9 @@ const Display = () => {
                         <button className="btn btn-primary w-100">Search</button>
                     </div>
                 </div>
-                {/* Task */}
-                {console.log(todo)}
-                {todo.data.map((ele, index) =>
-                    <div key={index} className={`card mb-3 task-card priority-${ele.priority.toLowerCase()}`}>
+                {/* Task */}                
+                {todo.map((ele, index) =>
+                    <div key={index} className={`card mb-3 task-card priority-low`}>
                         <div className="card-body">
                             <div className="d-flex justify-content-between">
                                 <div>
@@ -47,7 +46,7 @@ const Display = () => {
                                         </small>
                                     </span>
                                     <div className='d-flex gap-3'>
-                                    <button className="btn btn-warning btn-sm" onClick={()=>dispatch(editdata(ele))} >
+                                    <button className="btn btn-warning btn-sm"  onClick={()=>editdata(ele)} >
                                         <i className="bi bi-pencil" />
                                         Edit
                                     </button>

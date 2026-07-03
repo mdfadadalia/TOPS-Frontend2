@@ -2,10 +2,9 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { create, update } from '../slicer/todoSlicer'
 
-const Create = () => {
+const Create = ({ edittask }) => {
 
     const dispatch = useDispatch()
-    const todo = useSelector(state => state.todo)
     const task = useRef()
     const desc = useRef()
     const priority = useRef()
@@ -23,26 +22,22 @@ const Create = () => {
         desc.current.value = ""
         priority.current.value = ""
         duedate.current.value = ""
-        if (todo.editData == null) 
-        {
+        if (edittask == undefined) {
             dispatch(create(newArray))
         }
-        else
-        {
+        else {            
             dispatch(update(newArray))
         }
     }
     useEffect(() => {
-        console.log("Calling UseEffect ")
-        console.log(todo.editData)
-        if (todo.editData != null) 
-        {
-            task.current.value = todo.editData.task
-            desc.current.value = todo.editData.desc
-            priority.current.value = todo.editData.priority
-            duedate.current.value = todo.editData.duedate
+        if (edittask != undefined) {
+            task.current.value = edittask.task
+            desc.current.value = edittask.desc
+            priority.current.value = edittask.priority
+            duedate.current.value = edittask.duedate
         }
-    }, [todo])
+    }, [edittask])
+
     return <>
         <div className="col-lg-4">
             <div className="card p-4">
@@ -79,8 +74,8 @@ const Create = () => {
                         </div>
                     </div>
                     <div className="mt-3">
-                        <button className="btn btn-add w-100" type='submit'>                            
-                            {todo.editData==null?"Create Task" : "Update Task"}
+                        <button className="btn btn-add w-100" type='submit'>
+                            {edittask == undefined ? "Create Task" : "Update Task"}
                         </button>
                     </div>
                 </form>

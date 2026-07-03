@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Create from './componants/Create'
 import Display from './componants/Display'
+import { useSelector } from 'react-redux'
 
 const App = () => {
+  const todo = useSelector(state => state.todo)
+  const [edittask, setEditTask] = useState()
+  const editdata = (data) => {
+    const newArray = todo.find(ele => ele.task == data.task)
+    setEditTask(newArray)
+  }
   return <>
     <nav className="navbar navbar-dark">
       <div className="container">
@@ -16,10 +23,10 @@ const App = () => {
       <div className="row">
 
         {/* Left Panel */}
-        <Create/>
+        <Create edittask={edittask} />
 
         {/* Right Panel */}
-        <Display/>
+        <Display editdata={editdata} />
 
       </div>
     </div>
