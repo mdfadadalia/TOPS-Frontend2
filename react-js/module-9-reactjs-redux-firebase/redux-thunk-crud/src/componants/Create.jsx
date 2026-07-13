@@ -19,8 +19,9 @@ const Create = () => {
             phone: phone.current.value,
             age: age.current.value            
         }        
-        if (edit) {                        
-             dispatch(updateStudents({ id: edit.id, data }))                                    
+        if (edit) {          
+            data.id = edit.id              
+             dispatch(updateStudents(data))                                    
             setEdit()
         }
         else {

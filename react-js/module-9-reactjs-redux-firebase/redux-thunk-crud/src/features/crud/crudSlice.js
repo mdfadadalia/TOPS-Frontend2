@@ -17,8 +17,8 @@ export const delStudents = createAsyncThunk("Students/Del", async (id) => {
     return resp.data
 })
 
-export const updateStudents = createAsyncThunk("Students/Update", async ({ id, data }) => {
-    const resp = await axios.put(`${API_URL}/${id}`, data)
+export const updateStudents = createAsyncThunk("Students/Update", async (data) => {
+    const resp = await axios.put(`${API_URL}/${data.id}`, data)
     return resp.data
 })
 
